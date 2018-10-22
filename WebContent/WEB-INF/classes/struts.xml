@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.serve.static" value="false" />
+	<package name="default" extends="struts-default" namespace="">
+		<result-types>
+			<result-type name="json"
+				class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+		<interceptors>
+			<interceptor name="json"
+				class="org.apache.struts2.json.JSONInterceptor" />
+			<interceptor name="loginInterceptor"
+				class="mrmathami.struts2.interceptor.LoginInterceptor" />
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="loginStack" />
+
+		<global-results>
+			<result name="login" type="redirectAction">
+				<param name="actionName">login</param>
+			</result>
+		</global-results>
+
+		<action name="login" method="doLogin"
+			class="mrmathami.struts2.actions.LoginAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">index</param>
+			</result>
+			<result name="input">/WEB-INF/login.jsp</result>
+		</action>
+
+		<action name="logout" method="doLogout"
+			class="mrmathami.struts2.actions.LoginAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">login</param>
+			</result>
+		</action>
+
+		<action name="index">
+			<result type="redirectAction">
+				<param name="actionName">user_list</param>
+			</result>
+		</action>
+
+		<action name="user_create" method="doCreate"
+			class="mrmathami.struts2.actions.UserAction">
+			<result name="input">/WEB-INF/user.create.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">user_list</param>
+			</result>
+		</action>
+
+		<action name="user_list" method="doList"
+			class="mrmathami.struts2.actions.UserAction">
+			<result name="success">/WEB-INF/user.list.jsp</result>
+		</action>
+
+		<action name="user_edit" method="doEdit"
+			class="mrmathami.struts2.actions.UserAction">
+			<result name="input">/WEB-INF/user.edit.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">user_list</param>
+			</result>
+		</action>
+
+		<action name="user_delete" method="doDelete"
+			class="mrmathami.struts2.actions.UserAction">
+			<result name="input">/WEB-INF/user.delete.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">user_list</param>
+			</result>
+		</action>
+
+	</package>
+</struts>
