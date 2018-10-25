@@ -121,4 +121,68 @@ public final class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String doListAjax() {
+		users = Users.getUsers();
+		return SUCCESS;
+	}
+
+	public String doCreateAjax() {
+		if (user == null || !user.has(false, true, true)
+				|| user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
+			// error empty
+			error = ActionError.EMPTY;
+		} else if (Users.addUser(user) == null) {
+			// error failed
+			error = ActionError.FAILED;
+		}
+		return SUCCESS;
+	}
+
+	public String doEditAjax() {
+		// not normal
+		if (user == null || Users.getUserById(user) == null) {
+			// not normal
+			return SUCCESS;
+		}
+
+		if (user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
+			// error empty
+			error = ActionError.EMPTY;
+			return SUCCESS;
+		}
+
+		if (!Users.updateUserById(user)) {
+			// error failed
+			error = ActionError.FAILED;
+			return SUCCESS;
+		}
+		return SUCCESS;
+	}
+
+	public String doDeleteAjax() {
+		// not normal
+		if (user == null) {
+			// not normal
+			error = ActionError.EMPTY;
+			return SUCCESS;
+		}
+
+		User returnUser = Users.getUserById(user);
+		if (returnUser == null) {
+			// not normal
+			error = ActionError.EMPTY;
+			return SUCCESS;
+		}
+
+		if (!user.getUsername().equals(returnUser.getUsername())
+				|| !user.getPassword().equals(returnUser.getPassword())
+				|| !Users.deleteUserById(user)) {
+			// error failed
+			error = ActionError.FAILED;
+			return SUCCESS;
+		}
+
+		return SUCCESS;
+	}
+
 }

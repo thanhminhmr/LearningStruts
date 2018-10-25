@@ -49,6 +49,46 @@
 			</result>
 		</action>
 
+		<action name="users">
+			<result name="success">/WEB-INF/users.jsp</result>
+		</action>
+
+		<action name="user_list_ajax" method="doListAjax"
+			class="mrmathami.struts2.actions.UserAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="root">users</param>
+			</result>
+		</action>
+
+		<action name="user_create_ajax" method="doCreateAjax"
+			class="mrmathami.struts2.actions.UserAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="root">error</param>
+			</result>
+		</action>
+
+		<action name="user_edit_ajax" method="doEditAjax"
+			class="mrmathami.struts2.actions.UserAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="root">error</param>
+			</result>
+		</action>
+
+		<action name="user_delete_ajax" method="doDeleteAjax"
+			class="mrmathami.struts2.actions.UserAction">
+			<result name="success" type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="root">error</param>
+			</result>
+		</action>
+
 		<action name="user_create" method="doCreate"
 			class="mrmathami.struts2.actions.UserAction">
 			<result name="input">/WEB-INF/user.create.jsp</result>
