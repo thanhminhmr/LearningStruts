@@ -12,8 +12,20 @@
             </li>
             <li>
                 <a href="<s:url action='user_list' />">
-                    <i class="fa fa-archive"></i>
+                    <i class="fa fa-list-alt"></i>
                     <span>Danh sách người dùng</span>
+                </a>
+            </li>
+            <li>
+                <a href="<s:url action='users' />">
+                    <i class="fa fa-list"></i>
+                    <span>Danh sách người dùng AJAX</span>
+                </a>
+            </li>
+            <li>
+                <a href="<s:url action='user_list_excel' />">
+                    <i class="fa fa-file-excel-o"></i>
+                    <span>Danh sách người dùng Excel</span>
                 </a>
             </li>
         </ul>

@@ -5,12 +5,12 @@ import mrmathami.struts2.model.bean.User;
 import mrmathami.struts2.model.dao.Users;
 import mrmathami.struts2.utilities.ActionError;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public final class UserAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private User user;
-	private ArrayList<User> users;
+	private List<User> users;
 	private ActionError error = ActionError.NONE;
 
 	public ActionError getError() {
@@ -25,9 +25,10 @@ public final class UserAction extends ActionSupport {
 		this.user = user;
 	}
 
-	public ArrayList<User> getUsers() {
+	public List<User> getUsers() {
 		return users;
 	}
+
 
 	public String doCreate() {
 		if (user == null) {
